@@ -1,24 +1,12 @@
-# Use the official Python image as the base image
-FROM python:3.9-slim
+FROM python:3.10
 
-# Set environment variables
-ENV PYTHONUNBUFFERED=1
-ENV PYTHONDONTWRITEBYTECODE=1
+RUN mkdir /main
+COPY . /main/
 
-# Set the working directory inside the container
-WORKDIR /app
+WORKDIR /main
 
-# Copy the requirements file to the working directory
-COPY requirements.txt /app/
-
-# Install the dependencies specified in the requirements file
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy the entire application code to the container
-COPY . /app/
-
-# Expose the port that the application will listen on
-EXPOSE 5000
+RUN pip3 install --upgrade pip
+RUN pip3 install -r requirements.txt
 
 # Command to run the application
-CMD ["uvicorn", "main:app", "--host", "localhost", "--port", "5000"]
+CMD ["sh", "-c", "python service.py"]

@@ -134,6 +134,6 @@ def recommended_posts(id: int, time: datetime, limit: int = 10) -> List[PostGet]
 
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="localhost", port=5000)
+    uvicorn.run(app, host='0.0.0.0', port=5002)
 
 
